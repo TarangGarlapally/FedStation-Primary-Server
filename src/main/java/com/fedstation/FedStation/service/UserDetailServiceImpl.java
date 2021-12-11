@@ -19,4 +19,9 @@ public class UserDetailServiceImpl implements UserDetailService {
         return userDetailRepo.findById(userId);
     }
 
+    @Override
+    public void createUser(UserDetail userDetail) {
+        userDetailRepo.save(userDetail);
+    }
+
 }

@@ -25,6 +25,7 @@ public class WebAppController {
 
     @PostMapping("/createUser")
     public String createUser(@RequestBody UserDetail userDetail) {
+        userDetailService.createUser(userDetail);
         return "Successfully created user";
     }
 }

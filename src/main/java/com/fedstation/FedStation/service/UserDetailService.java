@@ -8,4 +8,6 @@ public interface UserDetailService {
 
     public Optional<UserDetail> findByUserId(String userId);
 
+    public void createUser(UserDetail userDetail);
+
 }
