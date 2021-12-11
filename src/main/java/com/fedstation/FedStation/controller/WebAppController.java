@@ -2,8 +2,8 @@ package com.fedstation.FedStation.controller;
 
 import java.util.Optional;
 
+import com.fedstation.FedStation.dto.UserDetailDto;
 import com.fedstation.FedStation.entity.UserDetail;
-import com.fedstation.FedStation.projection.UserDetailsProjecsProjection;
 import com.fedstation.FedStation.service.ProjectService;
 import com.fedstation.FedStation.service.UserDetailService;
 
@@ -24,7 +24,7 @@ public class WebAppController {
     private ProjectService projectService;
 
     @GetMapping("/userDetails")
-    public UserDetailsProjecsProjection getUserDetails(@RequestParam(name = "userId") String userId) {
+    public Optional<UserDetailDto> getUserDetails(@RequestParam(name = "userId") String userId) {
         return userDetailService.findByUserId(userId);
     }
 
