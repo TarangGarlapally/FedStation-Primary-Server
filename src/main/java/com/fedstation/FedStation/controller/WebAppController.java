@@ -3,6 +3,8 @@ package com.fedstation.FedStation.controller;
 import java.util.Optional;
 
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.UserDetailsProjecsProjection;
+import com.fedstation.FedStation.service.ProjectService;
 import com.fedstation.FedStation.service.UserDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,11 @@ public class WebAppController {
     @Autowired
     private UserDetailService userDetailService;
 
+    @Autowired
+    private ProjectService projectService;
+
     @GetMapping("/userDetails")
-    public Optional<UserDetail> getUserDetails(@RequestParam(name = "userId") String userId) {
+    public UserDetailsProjecsProjection getUserDetails(@RequestParam(name = "userId") String userId) {
         return userDetailService.findByUserId(userId);
     }
 
@@ -27,5 +32,10 @@ public class WebAppController {
     public String createUser(@RequestBody UserDetail userDetail) {
         userDetailService.createUser(userDetail);
         return "Successfully created user";
+    }
+
+    @GetMapping("/projectIdExists")
+    public Boolean checkIfProjectIdExists(@RequestParam(name = "projectId") String projectId) {
+        return projectService.checkProjectIdExists(projectId);
     }
 }

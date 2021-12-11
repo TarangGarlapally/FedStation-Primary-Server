@@ -3,6 +3,7 @@ package com.fedstation.FedStation.service;
 import java.util.Optional;
 
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.UserDetailsProjecsProjection;
 import com.fedstation.FedStation.repository.UserDetailRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class UserDetailServiceImpl implements UserDetailService {
     private UserDetailRepo userDetailRepo;
 
     @Override
-    public Optional<UserDetail> findByUserId(String userId) {
-        return userDetailRepo.findById(userId);
+    public UserDetailsProjecsProjection findByUserId(String userId) {
+        return userDetailRepo.getFullDetailsByUserId(userId);
     }
 
     @Override
