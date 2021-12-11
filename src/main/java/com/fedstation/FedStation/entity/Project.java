@@ -1,5 +1,6 @@
 package com.fedstation.FedStation.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -31,6 +32,20 @@ public class Project {
     private String startAtTime;
 
     private Long triggerEvery;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isProjectDisabled;
+
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isKeyDisabled;
+
+    public Boolean getIsProjectDisabled() {
+        return this.isProjectDisabled;
+    }
+
+    public Boolean getIsKeyDisabled() {
+        return this.isKeyDisabled;
+    }
 
     public String getid() {
         return this.id;

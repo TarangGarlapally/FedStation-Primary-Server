@@ -16,4 +16,15 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepo.checkProjectIdExists(projectId);
     }
 
+    @Override
+    public void updateStatusById(String id, String field, Boolean value) {
+        if (field.equals("isKeyDisabled")) {
+            projectRepo.updateIsKeyDisabledById(value, id);
+            return;
+        }
+        if (field.equals("isProjectDisabled")) {
+            projectRepo.updateIsProjectDisabledById(value, id);
+        }
+    }
+
 }

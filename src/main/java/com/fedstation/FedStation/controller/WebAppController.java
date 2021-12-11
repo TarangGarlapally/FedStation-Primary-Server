@@ -9,6 +9,8 @@ import com.fedstation.FedStation.service.UserDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,5 +39,13 @@ public class WebAppController {
     @GetMapping("/projectIdExists")
     public Boolean checkIfProjectIdExists(@RequestParam(name = "projectId") String projectId) {
         return projectService.checkProjectIdExists(projectId);
+    }
+
+    @PatchMapping("/updateStatus")
+    public String updateStatus(@RequestParam(name = "projectId") String projectId,
+            @RequestParam(name = "field") String field,
+            @RequestParam(name = "value") Boolean value) {
+        projectService.updateStatusById(projectId, field, value);
+        return "Successfully updated " + field;
     }
 }

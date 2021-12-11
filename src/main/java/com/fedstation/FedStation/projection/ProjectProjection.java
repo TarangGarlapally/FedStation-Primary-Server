@@ -20,4 +20,8 @@ public interface ProjectProjection {
 
     Long getTriggerEvery();
 
+    Boolean getIsProjectDisabled();
+
+    Boolean getIsKeyDisabled();
+
 }
