@@ -34,10 +34,26 @@ public class Project {
     private Long triggerEvery;
 
     @Column(columnDefinition = "boolean default false")
-    private Boolean isProjectDisabled;
+    private Boolean isProjectDisabled = false;
 
     @Column(columnDefinition = "boolean default false")
-    private Boolean isKeyDisabled;
+    private Boolean isKeyDisabled = false;
+
+    protected Project() {
+    }
+
+    public Project(String id, UserDetail userDetail, String projectName, String projectDescription, String projectKey,
+            Long maxUsersSize, ModelType modelType, String startAtTime, Long triggerEvery) {
+        this.id = id;
+        this.maxUsersSize = maxUsersSize;
+        this.modelType = modelType;
+        this.projectDescription = projectDescription;
+        this.projectKey = projectKey;
+        this.projectName = projectName;
+        this.startAtTime = startAtTime;
+        this.triggerEvery = triggerEvery;
+        this.user = userDetail;
+    }
 
     public Boolean getIsProjectDisabled() {
         return this.isProjectDisabled;
