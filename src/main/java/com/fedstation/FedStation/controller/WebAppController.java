@@ -63,4 +63,11 @@ public class WebAppController {
         projectService.updateKey(projectId);
         return "Successfully Updated Key";
     }
+
+    @PatchMapping("/updateTriggerOrSize/{projectId}")
+    public String updateIntAttr(@PathVariable String projectId, @RequestParam(name = "field") String field,
+            @RequestParam(name = "value") Long value) throws InvalidAttributeValueException {
+        projectService.updateIntAttr(projectId, field, value);
+        return "Successfully Updated " + field;
+    }
 }

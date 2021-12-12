@@ -68,4 +68,23 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepo.save(project);
     }
 
+    @Override
+    public void updateIntAttr(String projectId, String field, Long value) throws InvalidAttributeValueException {
+        Project project = projectRepo.findById(projectId).orElse(null);
+        if (project == null) {
+            throw new InvalidAttributeValueException();
+        }
+
+        if (field.equals("triggerEvery")) {
+            project.setTriggerEvery(value);
+            projectRepo.save(project);
+            return;
+        }
+        if (field.equals("maxUsersSize")) {
+            project.setMaxUsersSize(value);
+            projectRepo.save(project);
+            return;
+        }
+    }
+
 }
