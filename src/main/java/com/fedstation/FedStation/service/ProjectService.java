@@ -11,4 +11,6 @@ public interface ProjectService {
     public void updateStatusById(String id, String field, Boolean value);
 
     public void createNewProject(NewProjectDto project) throws InvalidAttributeValueException;
+
+    public void updateKey(String projectId) throws InvalidAttributeValueException;
 }

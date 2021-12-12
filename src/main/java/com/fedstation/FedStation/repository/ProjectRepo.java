@@ -1,6 +1,7 @@
 package com.fedstation.FedStation.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +20,8 @@ public interface ProjectRepo extends JpaRepository<Project, String> {
     Boolean checkProjectIdExists(String id);
 
     List<ProjectProjection> findAllByUserId(String userId);
+
+    Optional<Project> findById(String id);
 
     @Modifying
     @Transactional

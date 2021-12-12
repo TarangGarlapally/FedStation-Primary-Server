@@ -58,4 +58,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
+    @Override
+    public void updateKey(String projectId) throws InvalidAttributeValueException {
+        Project project = projectRepo.findById(projectId).orElse(null);
+        if (project == null) {
+            throw new InvalidAttributeValueException();
+        }
+        project.setProjectKey((new HelperServices()).generateKey());
+        projectRepo.save(project);
+    }
+
 }

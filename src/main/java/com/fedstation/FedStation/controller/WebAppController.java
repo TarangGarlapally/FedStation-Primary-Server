@@ -13,6 +13,7 @@ import com.fedstation.FedStation.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,6 +55,12 @@ public class WebAppController {
     @PostMapping("/createProject")
     public String createProject(@RequestBody NewProjectDto project) throws InvalidAttributeValueException {
         projectService.createNewProject(project);
-        return "Successfully created project";
+        return "Successfully Created Project";
+    }
+
+    @PatchMapping("/updateKey/{projectId}")
+    public String updateKey(@PathVariable String projectId) throws InvalidAttributeValueException {
+        projectService.updateKey(projectId);
+        return "Successfully Updated Key";
     }
 }
