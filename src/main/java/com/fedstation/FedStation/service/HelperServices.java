@@ -6,6 +6,7 @@ import java.util.Random;
 public class HelperServices {
 
     public String generateKey() {
+        //20 chars 
         return Long.toString((new Timestamp(System.currentTimeMillis())).getTime()) + getSaltString();
     }
 

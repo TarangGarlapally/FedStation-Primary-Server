@@ -3,6 +3,7 @@ package com.fedstation.FedStation.service;
 import javax.management.InvalidAttributeValueException;
 
 import com.fedstation.FedStation.dto.NewProjectDto;
+import com.fedstation.FedStation.projection.PackageProjectProjection;
 
 public interface ProjectService {
 
@@ -16,4 +17,5 @@ public interface ProjectService {
 
     public void updateIntAttr(String projectId, String field, Long value) throws InvalidAttributeValueException;
 
+    public PackageProjectProjection getProjectMetaDetails(String  projectId , String projectKey); 
 }

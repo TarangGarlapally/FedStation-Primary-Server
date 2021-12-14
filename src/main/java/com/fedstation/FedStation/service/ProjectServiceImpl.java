@@ -6,6 +6,7 @@ import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.entity.ModelType;
 import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.PackageProjectProjection;
 import com.fedstation.FedStation.repository.ModelTypeRepo;
 import com.fedstation.FedStation.repository.ProjectRepo;
 import com.fedstation.FedStation.repository.UserDetailRepo;
@@ -44,7 +45,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void createNewProject(NewProjectDto project) throws InvalidAttributeValueException {
         ModelType mType = modelTypeRepo.findByModel(project.getModelType()).orElse(null);
+
         UserDetail userDetail = userDetailRepo.findById(project.getUserId()).orElse(null);
+        
         if (mType == null || userDetail == null) {
             throw new InvalidAttributeValueException();
         }
@@ -85,6 +88,18 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepo.save(project);
             return;
         }
+    }
+
+    @Override
+    public PackageProjectProjection getProjectMetaDetails(String projectId, String projectKey) {
+        PackageProjectProjection packageProjectProjection = projectRepo.findByIdAndProjectKey(projectId, projectKey).orElse(null) ; 
+
+        if(packageProjectProjection == null) return null ; 
+
+        if(packageProjectProjection.getIsKeyDisabled() == true  || 
+        packageProjectProjection.getIsProjectDisabled() == true ) return null ; 
+
+        return packageProjectProjection ; 
     }
 
 }
