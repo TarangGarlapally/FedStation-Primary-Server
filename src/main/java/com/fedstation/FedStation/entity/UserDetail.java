@@ -17,7 +17,7 @@ public class UserDetail {
     private String email;
 
     private String org;
-
+    
     private Long projectsCount;
 
     public String getId() {
