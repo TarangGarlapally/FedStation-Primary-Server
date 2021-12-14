@@ -63,6 +63,13 @@
 			<version>2.7.0</version>
 		</dependency>
 
+		<!-- For CrossOrigin -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

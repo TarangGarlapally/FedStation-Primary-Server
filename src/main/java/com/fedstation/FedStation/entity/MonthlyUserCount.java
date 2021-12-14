@@ -20,7 +20,7 @@ public class MonthlyUserCount {
     @PrimaryKeyJoinColumn
     private Project project;
 
-    private Long month;
+    private String monthAndYear;
 
     private Long userCount;
 
@@ -28,8 +28,8 @@ public class MonthlyUserCount {
         return this.project;
     }
 
-    public Long getMonth() {
-        return this.month;
+    public String getMonthAndYear() {
+        return this.monthAndYear;
     }
 
     public Long getUserCount() {
