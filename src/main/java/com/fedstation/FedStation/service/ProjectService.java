@@ -17,5 +17,7 @@ public interface ProjectService {
 
     public void updateIntAttr(String projectId, String field, Long value) throws InvalidAttributeValueException;
 
-    public PackageProjectProjection getProjectMetaDetails(String  projectId , String projectKey); 
+    public PackageProjectProjection getProjectMetaDetails(String projectId, String projectKey);
+
+    public void deleteProject(String projectId) throws InvalidAttributeValueException;
 }

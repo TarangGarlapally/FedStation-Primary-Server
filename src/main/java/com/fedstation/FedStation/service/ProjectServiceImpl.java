@@ -47,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
         ModelType mType = modelTypeRepo.findByModel(project.getModelType()).orElse(null);
 
         UserDetail userDetail = userDetailRepo.findById(project.getUserId()).orElse(null);
-        
+
         if (mType == null || userDetail == null) {
             throw new InvalidAttributeValueException();
         }
@@ -59,6 +59,8 @@ public class ProjectServiceImpl implements ProjectService {
                 project.getTriggerEvery());
         projectRepo.save(projectRecord);
 
+        // increment project count
+        userDetailRepo.updateProjectsCount(userDetail.getProjectsCount() + 1, userDetail.getId());
     }
 
     @Override
@@ -92,14 +94,30 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public PackageProjectProjection getProjectMetaDetails(String projectId, String projectKey) {
-        PackageProjectProjection packageProjectProjection = projectRepo.findByIdAndProjectKey(projectId, projectKey).orElse(null) ; 
+        PackageProjectProjection packageProjectProjection = projectRepo.findByIdAndProjectKey(projectId, projectKey)
+                .orElse(null);
 
-        if(packageProjectProjection == null) return null ; 
+        if (packageProjectProjection == null)
+            return null;
 
-        if(packageProjectProjection.getIsKeyDisabled() == true  || 
-        packageProjectProjection.getIsProjectDisabled() == true ) return null ; 
+        if (packageProjectProjection.getIsKeyDisabled() == true ||
+                packageProjectProjection.getIsProjectDisabled() == true)
+            return null;
 
-        return packageProjectProjection ; 
+        return packageProjectProjection;
+    }
+
+    @Override
+    public void deleteProject(String projectId) throws InvalidAttributeValueException {
+        Project project = projectRepo.findById(projectId).orElse(null);
+
+        if (project == null) {
+            throw new InvalidAttributeValueException();
+        }
+
+        userDetailRepo.updateProjectsCount(project.getUser().getProjectsCount() - 1, project.getUser().getId());
+
+        projectRepo.delete(project);
     }
 
 }

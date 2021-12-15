@@ -1,5 +1,6 @@
 package com.fedstation.FedStation.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.management.InvalidAttributeValueException;
@@ -7,11 +8,14 @@ import javax.management.InvalidAttributeValueException;
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.dto.UserDetailDto;
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.MonthlyUserCountProjection;
+import com.fedstation.FedStation.service.MonthlyUserCountService;
 import com.fedstation.FedStation.service.ProjectService;
 import com.fedstation.FedStation.service.UserDetailService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +33,9 @@ public class WebAppController {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private MonthlyUserCountService monthlyUserCountService;
 
     @GetMapping("/userDetails")
     public Optional<UserDetailDto> getUserDetails(@RequestParam(name = "userId") String userId) {
@@ -71,5 +78,16 @@ public class WebAppController {
             @RequestParam(name = "value") Long value) throws InvalidAttributeValueException {
         projectService.updateIntAttr(projectId, field, value);
         return "Successfully Updated " + field;
+    }
+
+    @GetMapping("/monthlyUserCountAnalysis/{projectId}")
+    public List<MonthlyUserCountProjection> getMonthlyUserCountAnalysis(@PathVariable String projectId) {
+        return monthlyUserCountService.getMonthlyUserCountAnalysis(projectId);
+    }
+
+    @DeleteMapping("/deleteProject/{projectId}")
+    public String deleteProject(@PathVariable String projectId) throws InvalidAttributeValueException {
+        projectService.deleteProject(projectId);
+        return "Successfully Deleted Project - " + projectId;
     }
 }

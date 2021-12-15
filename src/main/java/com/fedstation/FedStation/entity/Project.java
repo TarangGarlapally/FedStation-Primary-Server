@@ -33,6 +33,8 @@ public class Project {
 
     private Long triggerEvery;
 
+    private String recieveAt;
+
     @Column(columnDefinition = "boolean default false")
     private Boolean isProjectDisabled = false;
 
@@ -125,6 +127,14 @@ public class Project {
 
     public void setTriggerEvery(Long triggerEvery) {
         this.triggerEvery = triggerEvery;
+    }
+
+    public String getRecieveAt() {
+        return this.recieveAt;
+    }
+
+    public void setRecieveAt(String recieveAt) {
+        this.recieveAt = recieveAt;
     }
 
     protected Project() {
