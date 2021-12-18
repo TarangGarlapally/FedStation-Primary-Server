@@ -12,7 +12,7 @@ public class NextAggregationTriggerTime {
     @Id
     private String projectId;
 
-    private String nextAggTimeStamp;
+    private Long nextAggTimeStamp;
 
     @Column(columnDefinition = "boolean default false")
     private Boolean isTriggerDisabled = false;
@@ -25,11 +25,11 @@ public class NextAggregationTriggerTime {
         this.projectId = projectId;
     }
 
-    public String getNextAggTimeStamp() {
+    public Long getNextAggTimeStamp() {
         return this.nextAggTimeStamp;
     }
 
-    public void setNextAggTimeStamp(String nextAggTimeStamp) {
+    public void setNextAggTimeStamp(long nextAggTimeStamp) {
         this.nextAggTimeStamp = nextAggTimeStamp;
     }
 

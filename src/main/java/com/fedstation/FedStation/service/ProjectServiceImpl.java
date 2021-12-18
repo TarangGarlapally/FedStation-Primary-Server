@@ -1,13 +1,17 @@
 package com.fedstation.FedStation.service;
 
+import java.util.Calendar;
+
 import javax.management.InvalidAttributeValueException;
 
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.entity.ModelType;
+import com.fedstation.FedStation.entity.NextAggregationTriggerTime;
 import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
 import com.fedstation.FedStation.projection.PackageProjectProjection;
 import com.fedstation.FedStation.repository.ModelTypeRepo;
+import com.fedstation.FedStation.repository.NextAggregationTriggerTimeRepo;
 import com.fedstation.FedStation.repository.ProjectRepo;
 import com.fedstation.FedStation.repository.UserDetailRepo;
 
@@ -25,6 +29,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private UserDetailRepo userDetailRepo;
+
+    @Autowired
+    private NextAggregationTriggerTimeRepo nextAggregationTriggerTimeRepo;
 
     @Override
     public Boolean checkProjectIdExists(String projectId) {
@@ -60,7 +67,23 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepo.save(projectRecord);
 
         // increment project count
+
         userDetailRepo.updateProjectsCount(userDetail.getProjectsCount() + 1, userDetail.getId());
+
+        // update next aggregation time
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + Integer.parseInt(project.getTriggerEvery().toString()));
+        cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, (Integer.parseInt(project.getStartAtTime()) + 2) % 24);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        System.out.println("\nNext Trigger Time: " + cal.getTime() + " " + cal.getTimeInMillis() + "\n");
+
+        NextAggregationTriggerTime ngt = new NextAggregationTriggerTime();
+        ngt.setProjectId(project.getId());
+        ngt.setNextAggTimeStamp(cal.getTimeInMillis());
+        nextAggregationTriggerTimeRepo.save(ngt);
+
     }
 
     @Override
