@@ -1,5 +1,8 @@
 package com.fedstation.FedStation.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import com.fedstation.FedStation.entity.NextAggregationTriggerTime;
@@ -15,6 +18,8 @@ public interface NextAggregationTriggerTimeRepo extends JpaRepository<NextAggreg
     @Modifying
     @Transactional
     @Query("update NextAggregationTriggerTime ngt set ngt.nextAggTimeStamp = ?1 where ngt.projectId = ?2")
-    void updateIsKeyDisabledById(String nextAggTimeStamp, String projectId);
+    void updateTimeStampByProjectID(Long nextAggTimeStamp, String projectId);
+
+    List<NextAggregationTriggerTime> findByNextAggTimeStamp(Long nextAggTimeStamp);
 
 }

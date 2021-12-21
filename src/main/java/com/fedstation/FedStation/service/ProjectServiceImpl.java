@@ -71,17 +71,13 @@ public class ProjectServiceImpl implements ProjectService {
         userDetailRepo.updateProjectsCount(userDetail.getProjectsCount() + 1, userDetail.getId());
 
         // update next aggregation time
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + Integer.parseInt(project.getTriggerEvery().toString()));
-        cal.set(Calendar.DATE, 1);
-        cal.set(Calendar.HOUR_OF_DAY, (Integer.parseInt(project.getStartAtTime()) + 2) % 24);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        System.out.println("\nNext Trigger Time: " + cal.getTime() + " " + cal.getTimeInMillis() + "\n");
+
+        System.out.println(
+                "\nNext Trigger Time: " + (new HelperServices()).getNextTimeAggregationStamp(projectRecord) + "\n");
 
         NextAggregationTriggerTime ngt = new NextAggregationTriggerTime();
         ngt.setProjectId(project.getId());
-        ngt.setNextAggTimeStamp(cal.getTimeInMillis());
+        ngt.setNextAggTimeStamp((new HelperServices()).getNextTimeAggregationStamp(projectRecord));
         nextAggregationTriggerTimeRepo.save(ngt);
 
     }
@@ -139,6 +135,8 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         userDetailRepo.updateProjectsCount(project.getUser().getProjectsCount() - 1, project.getUser().getId());
+
+        nextAggregationTriggerTimeRepo.deleteById(project.getId());
 
         projectRepo.delete(project);
     }

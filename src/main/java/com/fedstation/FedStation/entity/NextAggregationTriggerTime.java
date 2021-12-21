@@ -17,7 +17,7 @@ public class NextAggregationTriggerTime {
     @Column(columnDefinition = "boolean default false")
     private Boolean isTriggerDisabled = false;
 
-    public Object getProjectId() {
+    public String getProjectId() {
         return this.projectId;
     }
 

@@ -1,12 +1,15 @@
 package com.fedstation.FedStation.service;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Random;
+
+import com.fedstation.FedStation.entity.Project;
 
 public class HelperServices {
 
     public String generateKey() {
-        //20 chars 
+        // 20 chars
         return Long.toString((new Timestamp(System.currentTimeMillis())).getTime()) + getSaltString();
     }
 
@@ -21,5 +24,16 @@ public class HelperServices {
         String saltStr = salt.toString();
         return saltStr;
 
+    }
+
+    public Long getNextTimeAggregationStamp(Project project) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + Integer.parseInt(project.getTriggerEvery().toString()));
+        cal.set(Calendar.DATE, 1);
+        cal.set(Calendar.HOUR_OF_DAY, (Integer.parseInt(project.getStartAtTime()) + 2) % 24);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+
+        return cal.getTimeInMillis() / 1000;
     }
 }
