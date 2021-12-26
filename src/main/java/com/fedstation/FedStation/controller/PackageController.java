@@ -39,13 +39,16 @@ public class PackageController {
 
     @GetMapping("/sendModel")
     public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+
         documentStorageService.storeFile(file);
     }
 
-    @GetMapping("/recieveModel")
+    
+
     public ResponseEntity<Resource> downloadFile(HttpServletRequest request) throws MalformedURLException {
 
+               
         return documentStorageService.loadFileAsResource(request);
+    
 
-    }
-}
+    
