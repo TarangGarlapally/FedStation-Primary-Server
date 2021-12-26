@@ -12,8 +12,6 @@ import com.fedstation.FedStation.service.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,26 +45,7 @@ public class PackageController {
     @GetMapping("/recieveModel")
     public ResponseEntity<Resource> downloadFile( HttpServletRequest request) throws MalformedURLException{
 
-        Resource resource  = documentStorageService.loadFileAsResource() ; 
-        String contentType  = null ; 
-
-        try{
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath()) ; 
-        }
-        catch (IOException ex){
-            //pass
-        }
-
-
-        //ignore - used for temporary working 
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
-
-        return ResponseEntity.ok()
-        .contentType(MediaType.parseMediaType(contentType))
-        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-        .body(resource);
+        return  documentStorageService.loadFileAsResource(request) ; 
         
         
     }
