@@ -24,6 +24,8 @@ public interface ProjectRepo extends JpaRepository<Project, String> {
 
     Optional<PackageProjectProjection> findByIdAndProjectKey(String projectId, String projectKey);
 
+    Optional<PackageProjectProjection> findByIdAndProjectKey(String projectId, String projectKey);
+
     Optional<Project> findById(String id);
 
     @Modifying
