@@ -31,24 +31,21 @@ public class PackageController {
     @Autowired
     private DocumentStorageService documentStorageService;
 
-    @PostMapping("/getProjectDetails")
+    @GetMapping("/getProjectDetails")
     public PackageProjectProjection getProjectDetails(@RequestParam(name = "projectId") String projectId,
             @RequestParam(name = "projectKey") String projectKey) {
         return projectService.getProjectMetaDetails(projectId, projectKey);
     }
 
-    @GetMapping("/sendModel")
+    @PostMapping("/sendModel")
     public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-
         documentStorageService.storeFile(file);
     }
 
-    
-
+    @GetMapping("/recieveModel")
     public ResponseEntity<Resource> downloadFile(HttpServletRequest request) throws MalformedURLException {
 
-               
         return documentStorageService.loadFileAsResource(request);
-    
 
-    
+    }
+}
