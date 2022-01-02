@@ -22,7 +22,13 @@ public class MonthlyUserCount {
 
     private String monthAndYear;
 
+    private Long month ; 
+
     private Long userCount;
+
+    private Long modelScore ; 
+    
+    private Long modelSize  ; 
 
     public Project getProject() {
         return this.project;
@@ -32,8 +38,19 @@ public class MonthlyUserCount {
         return this.monthAndYear;
     }
 
+    public Long getMonth(){
+        return this.month ; 
+    }
     public Long getUserCount() {
         return this.userCount;
+    }
+
+    public Long getModelScore(){
+        return this.modelScore  ; 
+    }
+
+    public Long getModelSize(){
+        return this.modelSize ; 
     }
 
 }
