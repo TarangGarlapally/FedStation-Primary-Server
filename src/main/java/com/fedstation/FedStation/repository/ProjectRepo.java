@@ -26,6 +26,7 @@ public interface ProjectRepo extends JpaRepository<Project, String> {
 
     Optional<Project> findById(String id);
 
+
     @Modifying
     @Transactional
     @Query("update Project p set p.isKeyDisabled = ?1 where p.id = ?2")
