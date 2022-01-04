@@ -7,6 +7,7 @@ import javax.management.InvalidAttributeValueException;
 
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.dto.UserDetailDto;
+import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
 import com.fedstation.FedStation.projection.MonthlyUserCountProjection;
 import com.fedstation.FedStation.service.MonthlyUserCountService;
@@ -51,6 +52,11 @@ public class WebAppController {
     @GetMapping("/projectIdExists")
     public Boolean checkIfProjectIdExists(@RequestParam(name = "projectId") String projectId) {
         return projectService.checkProjectIdExists(projectId);
+    }
+
+    @GetMapping("/getProject/{projectId}")
+    public Project getProject(@PathVariable String projectId) {
+        return projectService.getProject(projectId);
     }
 
     @PatchMapping("/updateStatus")

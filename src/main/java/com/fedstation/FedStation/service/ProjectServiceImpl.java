@@ -1,6 +1,5 @@
 package com.fedstation.FedStation.service;
 
-
 import java.util.List;
 
 import javax.management.InvalidAttributeValueException;
@@ -140,6 +139,11 @@ public class ProjectServiceImpl implements ProjectService {
         nextAggregationTriggerTimeRepo.deleteById(project.getId());
 
         projectRepo.delete(project);
+    }
+
+    @Override
+    public Project getProject(String projectId) {
+        return projectRepo.findById(projectId).orElse(null);
     }
 
 }

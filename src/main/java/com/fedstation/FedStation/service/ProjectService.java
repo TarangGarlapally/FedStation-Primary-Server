@@ -1,11 +1,10 @@
 package com.fedstation.FedStation.service;
 
-
 import javax.management.InvalidAttributeValueException;
 
 import com.fedstation.FedStation.dto.NewProjectDto;
+import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.projection.PackageProjectProjection;
-
 
 public interface ProjectService {
 
@@ -22,4 +21,6 @@ public interface ProjectService {
     public PackageProjectProjection getProjectMetaDetails(String projectId, String projectKey);
 
     public void deleteProject(String projectId) throws InvalidAttributeValueException;
+
+    public Project getProject(String projectId);
 }
