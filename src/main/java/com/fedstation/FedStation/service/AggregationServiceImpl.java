@@ -9,7 +9,6 @@ public class AggregationServiceImpl implements AggregationService{
     @Override
     public void callAggregate(String projectId) {
 
-        System.out.print("ENTERED");
         String uri  = "https://fedstation-ml-service.herokuapp.com/aggregate/" + projectId; 
         RestTemplate restTemplate = new RestTemplate() ; 
         String result = restTemplate.getForObject(uri, String.class) ; 

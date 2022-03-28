@@ -32,9 +32,8 @@ public class AggregationScheduler {
     @Scheduled(cron = "*/10 * * * * *") 
     public void testTask() {
         Long timestampNow = (new Date()).getTime() / 1000;
-
+        
         System.out.println("\n" + timestampNow + "\n");
-        aggregationService.callAggregate("k_k");
 
         List<NextAggregationTriggerTime> nextAggregationTriggerTimeList = nextAggregationTriggerTimeRepo
                 .findByNextAggTimeStamp(timestampNow);
@@ -54,7 +53,7 @@ public class AggregationScheduler {
                 continue;
 
             // aggregate calling 
-            //aggregationService.callAggregate(ngt.getProjectId());
+            aggregationService.callAggregate(ngt.getProjectId());
             System.out.println(ngt.getProjectId() + " " + ngt.getNextAggTimeStamp());
         }
         System.out.println("\n");
