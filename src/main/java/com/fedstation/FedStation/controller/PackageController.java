@@ -44,8 +44,6 @@ public class PackageController {
 
     @GetMapping("/recieveModel")
     public ResponseEntity<Resource> downloadFile(HttpServletRequest request) throws MalformedURLException {
-
         return documentStorageService.loadFileAsResource(request);
-
     }
 }
