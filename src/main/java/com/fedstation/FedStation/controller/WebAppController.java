@@ -67,6 +67,13 @@ public class WebAppController {
         return "Successfully updated " + field;
     }
 
+    @PatchMapping("/updateDescription")
+    public String updateDescription(@RequestParam(name = "projectId") String projectId,
+            @RequestParam(name = "description") String description) throws InvalidAttributeValueException {
+        projectService.updateDescriptionById(projectId, description);
+        return "Successfully updated description";
+    }
+
     @PostMapping("/createProject")
     public String createProject(@RequestBody NewProjectDto project) throws InvalidAttributeValueException {
         projectService.createNewProject(project);

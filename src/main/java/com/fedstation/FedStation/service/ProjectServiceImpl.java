@@ -144,4 +144,14 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepo.findById(projectId).orElse(null);
     }
 
+    @Override
+    public void updateDescriptionById(String id, String description) throws InvalidAttributeValueException {
+        Project project = projectRepo.findById(id).orElse(null);
+        if (project == null) {
+            throw new InvalidAttributeValueException();
+        }
+        project.setProjectDescription(description);
+        projectRepo.save(project);
+    }
+
 }
