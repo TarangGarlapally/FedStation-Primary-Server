@@ -2,13 +2,15 @@ package com.fedstation.FedStation.controller;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.fedstation.FedStation.projection.PackageProjectProjection;
 import com.fedstation.FedStation.service.DocumentStorageService;
 import com.fedstation.FedStation.service.ProjectService;
-
+import com.fedstation.FedStation.utilities.FirebaseStorageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -39,6 +41,12 @@ public class PackageController {
 
     @PostMapping("/sendModel")
     public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+            //<test>
+                FirebaseStorageUtil f  = new FirebaseStorageUtil(); 
+                List<MultipartFile>  models  = new ArrayList<MultipartFile>() ;
+                models.add(file); 
+                f.sendModelsToFirebase("k_k", models);
+            //</test>        
         documentStorageService.storeFile(file);
     }
 
