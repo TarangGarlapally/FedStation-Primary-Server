@@ -40,13 +40,7 @@ public class PackageController {
     }
 
     @PostMapping("/sendModel")
-    public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
-            //<test>
-                FirebaseStorageUtil f  = new FirebaseStorageUtil(); 
-                List<MultipartFile>  models  = new ArrayList<MultipartFile>() ;
-                models.add(file); 
-                f.sendModelsToFirebase("k_k", models);
-            //</test>        
+    public void uploadFile(@RequestParam("file") MultipartFile file) throws IOException {      
         documentStorageService.storeFile(file);
     }
 

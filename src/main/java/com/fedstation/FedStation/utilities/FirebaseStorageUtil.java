@@ -18,8 +18,8 @@ public class FirebaseStorageUtil {
     public void dowloadGlobalModelFromFirebase(String projectId) throws FileNotFoundException{
         String uri  = "https://fedstation-ml-service.herokuapp.com/dowloadGlobalModelFromFirebase/" + projectId;
         RestTemplate restTemplate = new RestTemplate() ; 
-        ResponseEntity<MultipartFile> response = restTemplate.getForEntity(uri, MultipartFile.class) ; 
-        System.out.print(response.getBody().getName() + " result");
+        ResponseEntity<Object> response = restTemplate.getForEntity(uri, Object.class) ; 
+        System.out.print(response.getBody() + " result");
     }
 
     public void sendModelsToFirebase(String projectId , List<MultipartFile> models) throws FileNotFoundException{
