@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class FirebaseInitializeServiceImpl  implements FirebaseInitializeService{
 
     @Override
-    @PostConstruct
+    // @PostConstruct
     public void initialize() {
         try{
             

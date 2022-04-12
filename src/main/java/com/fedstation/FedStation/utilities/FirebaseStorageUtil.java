@@ -24,25 +24,32 @@ public class FirebaseStorageUtil {
 
     public void sendModelsToFirebase(String projectId , List<MultipartFile> models) throws FileNotFoundException{
 
-        // headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.MULTIPART_FORM_DATA.toString());
+        // // headers
 
-        // body 
-        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>(); 
-        body.add("headers", headers);
+        // MultiValueMap<String , String> h  = new LinkedMultiValueMap<String,String>() ; 
+        // h.add("content-type" , MediaType.MULTIPART_FORM_DATA.toString()) ;
 
-        for(MultipartFile model : models){
-            System.out.println(model.getName());
-            body.add(projectId , model);
-        }
 
-        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body);
+        // HttpHeaders headers = new HttpHeaders<>(h);
+        // headers.setContentType(MediaType.MULTIPART_FORM_DATA.toString());
+
+         
+
+        // // body 
+        // MultiValueMap<String, Object> body = new LinkedMultiValueMap<>(); 
+        // // body.add("headers", headers);
+
+        // for(MultipartFile model : models){
+        //     System.out.println(model.getName());
+        //     body.add(projectId , model);
+        // }
+
+        // HttpEntity<String> requestEntity = new HttpEntity<>("dd" , headers );
         
-        String uri  = "https://fedstation-ml-service.herokuapp.com/uploadModelsToFirebase/" + projectId;
-        RestTemplate restTemplate = new RestTemplate() ; 
-        ResponseEntity<String> response = restTemplate.postForEntity(uri, requestEntity, String.class) ; 
-        System.out.print(response + " result");
+        // String uri  = "http://127.0.0.1:8000/uploadModelsToFirebase/" + projectId;
+        // RestTemplate restTemplate = new RestTemplate() ; 
+        // ResponseEntity<String> response = restTemplate.postForEntity(uri, requestEntity, String.class) ; 
+        // System.out.print(response + " result");
         
     }
 
