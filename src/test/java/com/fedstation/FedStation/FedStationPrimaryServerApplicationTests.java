@@ -8,6 +8,7 @@ class FedStationPrimaryServerApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

@@ -1,0 +1,1 @@
+insert into project values("test-project", "f", "f", 100, "test description", "12344561289634APDFSC", "Test Project", 1, 1, 0, "testuser");
