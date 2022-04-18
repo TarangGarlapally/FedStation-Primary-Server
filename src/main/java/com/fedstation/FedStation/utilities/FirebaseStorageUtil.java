@@ -50,6 +50,10 @@ public class FirebaseStorageUtil {
         // RestTemplate restTemplate = new RestTemplate() ; 
         // ResponseEntity<String> response = restTemplate.postForEntity(uri, requestEntity, String.class) ; 
         // System.out.print(response + " result");
+
+        
+        // check this out
+        // https://stackoverflow.com/questions/58678072/how-to-upload-files-using-jdk-11-java-net-http-httpclient
         
     }
 
