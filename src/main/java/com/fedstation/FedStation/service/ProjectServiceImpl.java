@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         UserDetail userDetail = userDetailRepo.findById(project.getUserId()).orElse(null);
 
-        if (mType == null || userDetail == null) {
+        if (userDetail == null) {
             throw new InvalidAttributeValueException();
         }
 

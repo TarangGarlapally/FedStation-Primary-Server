@@ -5,11 +5,14 @@ import java.util.Optional;
 
 import javax.management.InvalidAttributeValueException;
 
+import com.fedstation.FedStation.dto.GlobalModelAnalyticsDto;
 import com.fedstation.FedStation.dto.NewProjectDto;
+import com.fedstation.FedStation.dto.UserAnalyticsDto;
 import com.fedstation.FedStation.dto.UserDetailDto;
 import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
 import com.fedstation.FedStation.projection.MonthlyUserCountProjection;
+import com.fedstation.FedStation.service.AnalyticsService;
 import com.fedstation.FedStation.service.MonthlyUserCountService;
 import com.fedstation.FedStation.service.ProjectService;
 import com.fedstation.FedStation.service.UserDetailService;
@@ -37,6 +40,9 @@ public class WebAppController {
 
     @Autowired
     private MonthlyUserCountService monthlyUserCountService;
+
+    @Autowired
+    private AnalyticsService analyticsService  ; 
 
     @GetMapping("/userDetails")
     public Optional<UserDetailDto> getUserDetails(@RequestParam(name = "userId") String userId) {
@@ -103,5 +109,18 @@ public class WebAppController {
         projectService.deleteProject(projectId);
         return "Successfully Deleted Project - " + projectId;
     }
+
+    // analytics end points 
+    @GetMapping("/userAnalytics/{projectId}")
+    public UserAnalyticsDto userAnalytics(@PathVariable String projectId){
+        return analyticsService.getUserAnalytics(projectId);
+    }
+
+    @GetMapping("/globalModelAnalytics/{projectId}")
+    public GlobalModelAnalyticsDto globalModelAnalytics(@PathVariable String projectId){
+        return analyticsService.getGlobalModelAnalytics(projectId);
+    }
+
+
 
 }
