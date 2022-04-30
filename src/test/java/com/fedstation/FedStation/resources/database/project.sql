@@ -1,0 +1,1 @@
+insert into project(id, is_project_disabled, is_key_disabled, max_users_size, project_description, project_key, project_name, trigger_every, model_type_id, recieve_at, user_id) values('test-project2', 'f', 'f', 100, 'test description', '12344561289634APDFSC', 'Test Project', 1, null, 0, 'testuser');
