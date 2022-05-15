@@ -1,12 +1,17 @@
 package com.fedstation.FedStation.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.management.InvalidAttributeValueException;
 
+import com.fedstation.FedStation.dto.MarketplaceItemDetail;
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.entity.ModelType;
 import com.fedstation.FedStation.entity.NextAggregationTriggerTime;
 import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.MarketplaceItemDetailProjection;
 import com.fedstation.FedStation.projection.PackageProjectProjection;
 import com.fedstation.FedStation.repository.ModelTypeRepo;
 import com.fedstation.FedStation.repository.NextAggregationTriggerTimeRepo;
@@ -152,6 +157,29 @@ public class ProjectServiceImpl implements ProjectService {
         }
         project.setProjectDescription(description);
         projectRepo.save(project);
+    }
+
+    @Override
+    public void publishToMarketplace(MarketplaceItemDetail marketplaceItemDetail) throws InvalidAttributeValueException {
+        Project project = projectRepo.findById(marketplaceItemDetail.getProjectId()).orElse(null);
+
+        if(project == null){
+            throw new InvalidAttributeValueException();
+        }
+
+        project.setIsPublished(true);
+        project.setMarketplaceItemName(marketplaceItemDetail.getName());
+        project.setMarketplaceItemDescription(marketplaceItemDetail.getDescription());
+        project.setMarketplaceItemContact(marketplaceItemDetail.getContact());
+
+        projectRepo.save(project);
+    }
+
+    @Override
+    public List<MarketplaceItemDetailProjection> getMarketplaceModels() {
+        
+        List<MarketplaceItemDetailProjection> marketplaceItemList = projectRepo.findByIsPublished(true);
+        return marketplaceItemList;
     }
 
 }

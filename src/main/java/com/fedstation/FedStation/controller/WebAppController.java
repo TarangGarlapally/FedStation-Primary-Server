@@ -6,11 +6,13 @@ import java.util.Optional;
 import javax.management.InvalidAttributeValueException;
 
 import com.fedstation.FedStation.dto.GlobalModelAnalyticsDto;
+import com.fedstation.FedStation.dto.MarketplaceItemDetail;
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.dto.UserAnalyticsDto;
 import com.fedstation.FedStation.dto.UserDetailDto;
 import com.fedstation.FedStation.entity.Project;
 import com.fedstation.FedStation.entity.UserDetail;
+import com.fedstation.FedStation.projection.MarketplaceItemDetailProjection;
 import com.fedstation.FedStation.projection.MonthlyUserCountProjection;
 import com.fedstation.FedStation.service.AnalyticsService;
 import com.fedstation.FedStation.service.MonthlyUserCountService;
@@ -121,6 +123,15 @@ public class WebAppController {
         return analyticsService.getGlobalModelAnalytics(projectId);
     }
 
+    @PostMapping("/publishToMarketplace")
+    public String publishToMarketplace(@RequestBody MarketplaceItemDetail marketplaceItemDetail) throws InvalidAttributeValueException {
+        projectService.publishToMarketplace(marketplaceItemDetail);
+        return "Successfully published to marketplace";
+    }
 
+    @GetMapping("/getMarketplaceModels")
+    public List<MarketplaceItemDetailProjection> getMarketplaceModels(){
+        return projectService.getMarketplaceModels();
+    }
 
 }

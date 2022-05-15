@@ -9,10 +9,8 @@ import com.fedstation.FedStation.repository.NextAggregationTriggerTimeRepo;
 import com.fedstation.FedStation.repository.ProjectRepo;
 import com.fedstation.FedStation.service.AggregationService;
 import com.fedstation.FedStation.service.HelperServices;
-import com.fedstation.FedStation.utilities.FirebaseStorageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +27,8 @@ public class AggregationScheduler {
     @Autowired
     private AggregationService aggregationService ; 
 
-    // @Scheduled(cron = "0 0 * 1 * *")
-    @Scheduled(cron = "*/10 * * * * *") 
+    @Scheduled(cron = "0 0 * 1 * *")
+    // @Scheduled(cron = "*/10 * * * * *") 
     public void testTask() {
         Long timestampNow = (new Date()).getTime() / 1000;
         

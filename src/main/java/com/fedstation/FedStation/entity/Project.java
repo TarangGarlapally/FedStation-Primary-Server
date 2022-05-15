@@ -21,9 +21,15 @@ public class Project {
 
     private String projectDescription;
 
+    private String marketplaceItemName;
+
+    private String marketplaceItemDescription;
+
     private String projectKey;
 
     private Long maxUsersSize;
+
+    private String marketplaceItemContact;
 
     @ManyToOne
     @PrimaryKeyJoinColumn
@@ -41,8 +47,35 @@ public class Project {
     @Column(columnDefinition = "boolean default false")
     private Boolean isKeyDisabled = false;
 
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isPublished = false;
+
     public Boolean getIsProjectDisabled() {
         return this.isProjectDisabled;
+    }
+
+    public String getMarketplaceItemContact() {
+        return marketplaceItemContact;
+    }
+
+    public void setMarketplaceItemContact(String marketplaceItemContact) {
+        this.marketplaceItemContact = marketplaceItemContact;
+    }
+
+    public String getMarketplaceItemName() {
+        return marketplaceItemName;
+    }
+
+    public void setMarketplaceItemName(String marketplaceItemName) {
+        this.marketplaceItemName = marketplaceItemName;
+    }
+
+    public String getMarketplaceItemDescription() {
+        return marketplaceItemDescription;
+    }
+
+    public void setMarketplaceItemDescription(String marketplaceItemDescription) {
+        this.marketplaceItemDescription = marketplaceItemDescription;
     }
 
     public void setIsProjectDisabled(Boolean isProjectDisabled) {
@@ -55,6 +88,14 @@ public class Project {
 
     public void setIsKeyDisabled(Boolean isKeyDisabled) {
         this.isKeyDisabled = isKeyDisabled;
+    }
+
+    public Boolean getIsPublished() {
+        return this.isPublished;
+    }
+
+    public void setIsPublished(Boolean isPublished) {
+        this.isPublished = isPublished;
     }
 
     public String getId() {

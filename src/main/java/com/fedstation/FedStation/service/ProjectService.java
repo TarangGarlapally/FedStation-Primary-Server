@@ -1,9 +1,13 @@
 package com.fedstation.FedStation.service;
 
+import java.util.List;
+
 import javax.management.InvalidAttributeValueException;
 
+import com.fedstation.FedStation.dto.MarketplaceItemDetail;
 import com.fedstation.FedStation.dto.NewProjectDto;
 import com.fedstation.FedStation.entity.Project;
+import com.fedstation.FedStation.projection.MarketplaceItemDetailProjection;
 import com.fedstation.FedStation.projection.PackageProjectProjection;
 
 public interface ProjectService {
@@ -25,4 +29,8 @@ public interface ProjectService {
     public void deleteProject(String projectId) throws InvalidAttributeValueException;
 
     public Project getProject(String projectId);
+
+    public void publishToMarketplace(MarketplaceItemDetail marketplaceItemDetail) throws InvalidAttributeValueException;
+
+    public List<MarketplaceItemDetailProjection> getMarketplaceModels();
 }

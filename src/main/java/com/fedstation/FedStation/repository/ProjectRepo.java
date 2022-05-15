@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import com.fedstation.FedStation.entity.Project;
+import com.fedstation.FedStation.projection.MarketplaceItemDetailProjection;
 import com.fedstation.FedStation.projection.PackageProjectProjection;
 import com.fedstation.FedStation.projection.ProjectProjection;
 
@@ -36,6 +37,8 @@ public interface ProjectRepo extends JpaRepository<Project, String> {
     @Transactional
     @Query("update Project p set p.isProjectDisabled = ?1 where p.id = ?2")
     void updateIsProjectDisabledById(Boolean isDisabled, String id);
+
+    List<MarketplaceItemDetailProjection> findByIsPublished(Boolean isPublished);
 
 }
 
