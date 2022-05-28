@@ -26,7 +26,7 @@ public class HelperServices {
 
     }
 
-    public Long getNextTimeAggregationStamp(Project project) {
+    public Long getNextAggregationTimeStamp(Project project) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MONTH, cal.get(Calendar.MONTH) + Integer.parseInt(project.getTriggerEvery().toString()));
         cal.set(Calendar.DATE, 1);
@@ -36,4 +36,12 @@ public class HelperServices {
 
         return cal.getTimeInMillis() / 1000;
     }
+
+    public Long getHourTimeStamp(Long timestamp) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(timestamp*1000);
+        cal.add(Calendar.HOUR, 1);
+        return cal.getTimeInMillis() / 1000;
+    }
+    
 }

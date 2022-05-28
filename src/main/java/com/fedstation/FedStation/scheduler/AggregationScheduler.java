@@ -46,14 +46,20 @@ public class AggregationScheduler {
 
             Project project = projectRepo.findById(ngt.getProjectId()).orElse(null);
             nextAggregationTriggerTimeRepo.updateTimeStampByProjectID(
-                    (new HelperServices()).getNextTimeAggregationStamp(project), ngt.getProjectId());
+                    (new HelperServices()).getNextAggregationTimeStamp(project), ngt.getProjectId());
 
             if (ngt.getIsTriggerDisabled())
                 continue;
 
-            // aggregate calling 
-            aggregationService.callAggregate(ngt.getProjectId());
-            System.out.println(ngt.getProjectId() + " " + ngt.getNextAggTimeStamp());
+            // aggregation calling
+            try {
+                aggregationService.callAggregate(ngt.getProjectId());
+                System.out.println(ngt.getProjectId() + " " + ngt.getNextAggTimeStamp());
+            } catch (Exception e) {
+                System.out.println("Aggregation failed. Will retry next hour.");
+                nextAggregationTriggerTimeRepo.updateTimeStampByProjectID(
+                    (new HelperServices()).getHourTimeStamp(timestampNow), ngt.getProjectId());
+            }
         }
         System.out.println("\n");
     }

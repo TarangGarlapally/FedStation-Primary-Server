@@ -76,11 +76,11 @@ public class ProjectServiceImpl implements ProjectService {
         // update next aggregation time
 
         System.out.println(
-                "\nNext Trigger Time: " + (new HelperServices()).getNextTimeAggregationStamp(projectRecord) + "\n");
+                "\nNext Trigger Time: " + (new HelperServices()).getNextAggregationTimeStamp(projectRecord) + "\n");
 
         NextAggregationTriggerTime ngt = new NextAggregationTriggerTime();
         ngt.setProjectId(project.getId());
-        ngt.setNextAggTimeStamp((new HelperServices()).getNextTimeAggregationStamp(projectRecord));
+        ngt.setNextAggTimeStamp((new HelperServices()).getNextAggregationTimeStamp(projectRecord));
         nextAggregationTriggerTimeRepo.save(ngt);
 
     }
